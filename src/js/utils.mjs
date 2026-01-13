@@ -23,21 +23,7 @@ export function getParam(param) {
   return urlParams.get(param);
 }
 
-/**
- * Render a list of items using a template function.
- * @param {Function} templateFn - function(item) => html string
- * @param {Element} parentElement - DOM element to insert into
- * @param {Array} list - array of items
- * @param {string} position - insert position (default 'afterbegin')
- * @param {boolean} clear - whether to clear parent before inserting
- */
-export function renderListWithTemplate(
-  templateFn,
-  parentElement,
-  list,
-  position = 'afterbegin',
-  clear = false,
-) {
+export function renderListWithTemplate(templateFn, parentElement, list, position = 'afterbegin', clear = false) {
   if (clear) parentElement.innerHTML = '';
   const htmlStrings = list.map(templateFn);
   parentElement.insertAdjacentHTML(position, htmlStrings.join(''));
