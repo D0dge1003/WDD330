@@ -8,13 +8,8 @@ export default class ProductDetails {
   }
 
   async init() {
-    // fetch product details
     this.product = await this.dataSource.findProductById(this.productId);
-
-    // render HTML
     this.renderProductDetails();
-
-    // attach listener to Add to Cart button
     const btn = qs('#addToCart');
     if (btn) {
       btn.addEventListener('click', this.addProductToCart.bind(this));
