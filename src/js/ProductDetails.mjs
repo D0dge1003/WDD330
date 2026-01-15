@@ -29,6 +29,7 @@ export default class ProductDetails {
     const nameEl = qs('#productName');
     const imgEl = qs('#productImage');
     const priceEl = qs('#productPrice');
+    const discountEl = qs('#productDiscount');
     const colorEl = qs('#productColor');
     const descEl = qs('#productDescription');
     const addBtn = qs('#addToCart');
@@ -40,6 +41,17 @@ export default class ProductDetails {
       imgEl.alt = this.product.Name || '';
     }
     if (priceEl) priceEl.textContent = `$${(this.product.FinalPrice ?? this.product.ListPrice ?? 0).toFixed(2)}`;
+    
+    const listPrice = this.product.ListPrice ?? 0;
+    const finalPrice = this.product.FinalPrice ?? this.product.ListPrice ?? 0;
+    if (discountEl && listPrice > finalPrice) {
+      const discountAmount = listPrice - finalPrice;
+      const discountPercent = Math.round((discountAmount / listPrice) * 100);
+      discountEl.textContent = `Save ${discountPercent}% ($${discountAmount.toFixed(2)} off)`;
+    } else if (discountEl) {
+      discountEl.textContent = '';
+    }
+    
     if (colorEl) colorEl.textContent = this.product.Colors?.[0]?.ColorName || '';
     if (descEl) descEl.innerHTML = this.product.DescriptionHtmlSimple || this.product.Description || '';
     if (addBtn) addBtn.dataset.id = this.product.Id || '';
