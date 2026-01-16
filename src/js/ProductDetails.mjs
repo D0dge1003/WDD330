@@ -37,15 +37,15 @@ export default class ProductDetails {
     if (brandEl) brandEl.textContent = this.product.Brand?.Name || '';
     if (nameEl) nameEl.textContent = this.product.NameWithoutBrand || this.product.Name || '';
     if (imgEl) {
-      const imgSrc = (this.product.Image || '').replace(/^\.\./, '/');
+      const imgSrc = (this.product.Image || '').replace(/^\.\.\/images/, '/images');
       imgEl.src = imgSrc;
       imgEl.alt = this.product.Name || '';
     }
     if (priceEl) priceEl.textContent = `$${(this.product.FinalPrice ?? this.product.ListPrice ?? 0).toFixed(2)}`;
-    
+
     const listPrice = this.product.SuggestedRetailPrice ?? this.product.ListPrice ?? 0;
     const finalPrice = this.product.FinalPrice ?? this.product.ListPrice ?? 0;
-    
+
     if (discountEl && listPrice > finalPrice) {
       const discountAmount = listPrice - finalPrice;
       const discountPercent = Math.round((discountAmount / listPrice) * 100);
@@ -53,7 +53,7 @@ export default class ProductDetails {
     } else if (discountEl) {
       discountEl.textContent = '';
     }
-    
+
     if (colorEl) colorEl.textContent = this.product.Colors?.[0]?.ColorName || '';
     if (descEl) descEl.innerHTML = this.product.DescriptionHtmlSimple || this.product.Description || '';
     if (addBtn) addBtn.dataset.id = this.product.Id || '';
