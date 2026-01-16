@@ -7,6 +7,8 @@ const productId = getParam("product");
 const dataSource = new ProductData("tents");
 
 if (productId) {
-  const product = new ProductDetails(productId, dataSource);
-  product.init();
+  (async () => {
+    const product = new ProductDetails(productId, dataSource);
+    await product.init();
+  })();
 }
