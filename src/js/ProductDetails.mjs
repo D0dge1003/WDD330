@@ -37,13 +37,15 @@ export default class ProductDetails {
     if (brandEl) brandEl.textContent = this.product.Brand?.Name || '';
     if (nameEl) nameEl.textContent = this.product.NameWithoutBrand || this.product.Name || '';
     if (imgEl) {
-      imgEl.src = this.product.Image || '';
+      const imgSrc = (this.product.Image || '').replace(/^\.\./, '/');
+      imgEl.src = imgSrc;
       imgEl.alt = this.product.Name || '';
     }
     if (priceEl) priceEl.textContent = `$${(this.product.FinalPrice ?? this.product.ListPrice ?? 0).toFixed(2)}`;
     
-    const listPrice = this.product.ListPrice ?? 0;
+    const listPrice = this.product.SuggestedRetailPrice ?? this.product.ListPrice ?? 0;
     const finalPrice = this.product.FinalPrice ?? this.product.ListPrice ?? 0;
+    
     if (discountEl && listPrice > finalPrice) {
       const discountAmount = listPrice - finalPrice;
       const discountPercent = Math.round((discountAmount / listPrice) * 100);
