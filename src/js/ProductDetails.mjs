@@ -37,7 +37,7 @@ export default class ProductDetails {
     if (brandEl) brandEl.textContent = this.product.Brand?.Name || '';
     if (nameEl) nameEl.textContent = this.product.NameWithoutBrand || this.product.Name || '';
     if (imgEl) {
-      const imgSrc = (this.product.Image || '').replace(/^\.\.\/images/, '/images');
+      const imgSrc = (this.product.Image || '').replace(/^\.\.\/images/, `${import.meta.env.BASE_URL}images`);
       imgEl.src = imgSrc;
       imgEl.alt = this.product.Name || '';
     }
