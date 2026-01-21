@@ -1,4 +1,4 @@
-import{r as l,l as d,a as m}from"./utils-k_5QqyC_.js";import{P as u}from"./ProductData-B1aYoRqE.js";function h(t){var r,c;const e=((r=t.Images)==null?void 0:r.PrimaryMedium)||t.Image||"",a=t.FinalPrice<t.SuggestedRetailPrice,s=t.SuggestedRetailPrice-t.FinalPrice,o=a?`<p class="product__discount">-${Math.round(s/t.SuggestedRetailPrice*100)}% Off</p>`:"";return`
+import{r as l,l as d,a as m}from"./utils-B3GCnpRJ.js";import{P as u}from"./ProductData-B1aYoRqE.js";function h(t){var r,c;const e=((r=t.Images)==null?void 0:r.PrimaryMedium)||t.Image||"",a=t.FinalPrice<t.SuggestedRetailPrice,s=t.SuggestedRetailPrice-t.FinalPrice,o=a?`<p class="product__discount">-${Math.round(s/t.SuggestedRetailPrice*100)}% Off</p>`:"";return`
     <li class="product-card">
       <a href="/WDD330/product_pages/index.html?product=${t.Id}">
         <img src="${e}" alt="${t.Name}" />
