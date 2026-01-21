@@ -50,6 +50,18 @@ export async function loadHeaderFooter() {
   renderWithTemplate(headerTemplate, headerElement);
   renderWithTemplate(footerTemplate, footerElement);
   updateCartCount();
+
+  // Add search functionality
+  const searchForm = document.querySelector("#search-form");
+  if (searchForm) {
+    searchForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const query = document.querySelector("#search-input").value.trim();
+      // Normalize search term: replace spaces with hyphens, convert to lowercase
+      const normalizedQuery = query.toLowerCase().replace(/\s+/g, '-');
+      window.location.href = `/WDD330/product_listing/index.html?q=${encodeURIComponent(normalizedQuery)}`;
+    });
+  }
 }
 
 export function updateCartCount() {
