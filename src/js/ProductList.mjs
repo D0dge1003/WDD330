@@ -1,7 +1,7 @@
 import { renderListWithTemplate } from './utils.mjs';
 
 function productCardTemplate(product) {
-  const imgSrc = (product.Image || '').replace(/^\.\.\/images/, `${import.meta.env.BASE_URL}images`);
+  const imgSrc = product.Images?.PrimaryMedium || product.Image || ''; // Fallback for local testing if needed
   const isDiscounted = product.FinalPrice < product.SuggestedRetailPrice;
   const discountAmount = product.SuggestedRetailPrice - product.FinalPrice;
   const discountHTML = isDiscounted ? `<p class="product__discount">-${Math.round((discountAmount / product.SuggestedRetailPrice) * 100)}% Off</p>` : '';
@@ -12,7 +12,7 @@ function productCardTemplate(product) {
         <img src="${imgSrc}" alt="${product.Name}" />
         <h3 class="card__brand">${product.Brand?.Name || ''}</h3>
         <h2 class="card__name">${product.NameWithoutBrand || product.Name}</h2>
-        <p class="product-card__price">$${(product.FinalPrice ?? product.ListPrice ?? 0).toFixed(2)}</p>
+        <p class="product-card__price">$${product.ListPrice}</p>
         ${discountHTML}
       </a>
     </li>
@@ -28,7 +28,7 @@ export default class ProductList {
   }
 
   async init() {
-    this.products = await this.dataSource.getData();
+    this.products = await this.dataSource.getData(this.category);
     this.renderList(this.products);
   }
 
