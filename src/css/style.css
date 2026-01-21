@@ -96,7 +96,7 @@ p {
   margin-top: -1.3em;
 }
 
-.logo--square > div {
+.logo--square>div {
   margin-top: -1.7em;
 }
 
@@ -131,6 +131,8 @@ button {
 
 .cart svg {
   width: 25px;
+  height: auto;
+  max-width: 100%;
 }
 
 .cart:hover svg {
