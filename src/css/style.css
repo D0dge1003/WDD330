@@ -284,3 +284,58 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+
+.alert-list {
+  background-color: transparent;
+  padding: 0.5em;
+}
+
+.alert-list p {
+  padding: 0.5em;
+  text-align: center;
+}
+
+.cart-footer {
+  margin-top: 1em;
+  border-top: 2px solid var(--primary-color);
+  padding-top: 1em;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cart-footer.hide {
+  display: none;
+}
+
+.cart-total {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.remove-item {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  padding: 5px;
+  font-weight: bold;
+}
+
+.cart-card {
+  position: relative;
+}
+
+.cart-count {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: var(--secondary-color);
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8em;
+}

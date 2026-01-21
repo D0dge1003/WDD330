@@ -23,7 +23,60 @@ export function getParam(param) {
   return urlParams.get(param);
 }
 
-export function renderListWithTemplate(templateFn, parentElement, list, position = 'afterbegin', clear = false) {
+export function renderWithTemplate(
+  template,
+  parentElement,
+  data,
+  callback
+) {
+  parentElement.insertAdjacentHTML("afterbegin", template);
+  if (callback) {
+    callback(data);
+  }
+}
+
+export async function loadTemplate(path) {
+  const res = await fetch(path);
+  const template = await res.text();
+  return template;
+}
+
+export async function loadHeaderFooter() {
+  const headerTemplate = await loadTemplate("/partials/header.html");
+  const footerTemplate = await loadTemplate("/partials/footer.html");
+  const headerElement = document.querySelector("#main-header");
+  const footerElement = document.querySelector("#main-footer");
+
+  renderWithTemplate(headerTemplate, headerElement);
+  renderWithTemplate(footerTemplate, footerElement);
+  updateCartCount();
+}
+
+export function updateCartCount() {
+  const cartItems = getLocalStorage("so-cart");
+  if (cartItems && cartItems.length > 0) {
+    const count = cartItems.length;
+    const cartIcon = document.querySelector(".cart a");
+    if (cartIcon) {
+      // Check if badge already exists
+      let badge = cartIcon.querySelector(".cart-count");
+      if (!badge) {
+        badge = document.createElement("span");
+        badge.classList.add("cart-count");
+        cartIcon.appendChild(badge);
+      }
+      badge.innerText = count;
+    }
+  }
+}
+
+export function renderListWithTemplate(
+  templateFn,
+  parentElement,
+  list,
+  position = "afterbegin",
+  clear = false
+) {
   if (clear) parentElement.innerHTML = '';
   const htmlStrings = list.map(templateFn);
   parentElement.insertAdjacentHTML(position, htmlStrings.join(''));
