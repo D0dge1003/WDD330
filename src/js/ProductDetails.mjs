@@ -37,7 +37,10 @@ export default class ProductDetails {
     if (brandEl) brandEl.textContent = this.product.Brand?.Name || '';
     if (nameEl) nameEl.textContent = this.product.NameWithoutBrand || this.product.Name || '';
     if (imgEl) {
-      const imgSrc = (this.product.Image || '').replace(/^\.\.\/images/, `${import.meta.env.BASE_URL}images`);
+      // Try multiple image sources from API response
+      const imgSrc = this.product.Images?.PrimaryLarge ||
+        this.product.Images?.PrimaryMedium ||
+        this.product.Image || '';
       imgEl.src = imgSrc;
       imgEl.alt = this.product.Name || '';
     }

@@ -11,9 +11,17 @@ function convertToJson(res) {
 export default class ProductData {
   constructor() { }
   async getData(category) {
-    const response = await fetch(baseURL + `products/search/${category}`);
-    const data = await convertToJson(response);
-    return data.Result;
+    try {
+      const url = baseURL + `products/search/${category}`;
+      console.log('Fetching products from:', url);
+      const response = await fetch(url);
+      const data = await convertToJson(response);
+      console.log('API Response:', data);
+      return data.Result || [];
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      return [];
+    }
   }
   async findProductById(id) {
     const response = await fetch(baseURL + `product/${id}`);
