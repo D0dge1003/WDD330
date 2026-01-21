@@ -50,6 +50,15 @@ export async function loadHeaderFooter() {
   renderWithTemplate(headerTemplate, headerElement);
   renderWithTemplate(footerTemplate, footerElement);
   updateCartCount();
+
+  const searchForm = document.querySelector("#search-form");
+  if (searchForm) {
+    searchForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const query = document.querySelector("#search-input").value;
+      window.location.href = `/WDD330/product_listing/index.html?q=${encodeURIComponent(query)}`;
+    });
+  }
 }
 
 export function updateCartCount() {
