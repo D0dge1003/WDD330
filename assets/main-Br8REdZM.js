@@ -1,10 +1,100 @@
-(function(){const e=document.createElement("link").relList;if(e&&e.supports&&e.supports("modulepreload"))return;for(const r of document.querySelectorAll('link[rel="modulepreload"]'))i(r);new MutationObserver(r=>{for(const s of r)if(s.type==="childList")for(const o of s.addedNodes)o.tagName==="LINK"&&o.rel==="modulepreload"&&i(o)}).observe(document,{childList:!0,subtree:!0});function n(r){const s={};return r.integrity&&(s.integrity=r.integrity),r.referrerPolicy&&(s.referrerPolicy=r.referrerPolicy),r.crossOrigin==="use-credentials"?s.credentials="include":r.crossOrigin==="anonymous"?s.credentials="omit":s.credentials="same-origin",s}function i(r){if(r.ep)return;r.ep=!0;const s=n(r);fetch(r.href,s)}})();function a(t){if(t.ok)return t.json();throw new Error("Bad Response")}class c{constructor(e){this.category=e,this.path=`/WDD330/json/${this.category}.json`}getData(){return fetch(this.path).then(a).then(e=>e)}async findProductById(e){return(await this.getData()).find(i=>i.Id===e)}}function f(t,e=document){return e.querySelector(t)}function h(t){return JSON.parse(localStorage.getItem(t))}function m(t,e){localStorage.setItem(t,JSON.stringify(e))}function g(t){return new URLSearchParams(window.location.search).get(t)}function u(t,e,n,i="afterbegin",r=!1){r&&(e.innerHTML="");const s=n.map(t);e.insertAdjacentHTML(i,s.join(""))}function l(t){var n;const e=(t.Image||"").replace(/^\.\.\/images/,"/WDD330/images");return`
+(function () {
+  const e = document.createElement("link").relList;
+  if (e && e.supports && e.supports("modulepreload")) return;
+  for (const r of document.querySelectorAll('link[rel="modulepreload"]')) i(r);
+  new MutationObserver((r) => {
+    for (const s of r)
+      if (s.type === "childList")
+        for (const o of s.addedNodes)
+          o.tagName === "LINK" && o.rel === "modulepreload" && i(o);
+  }).observe(document, { childList: !0, subtree: !0 });
+  function n(r) {
+    const s = {};
+    return (
+      r.integrity && (s.integrity = r.integrity),
+      r.referrerPolicy && (s.referrerPolicy = r.referrerPolicy),
+      r.crossOrigin === "use-credentials"
+        ? (s.credentials = "include")
+        : r.crossOrigin === "anonymous"
+          ? (s.credentials = "omit")
+          : (s.credentials = "same-origin"),
+      s
+    );
+  }
+  function i(r) {
+    if (r.ep) return;
+    r.ep = !0;
+    const s = n(r);
+    fetch(r.href, s);
+  }
+})();
+function a(t) {
+  if (t.ok) return t.json();
+  throw new Error("Bad Response");
+}
+class c {
+  constructor(e) {
+    (this.category = e), (this.path = `/WDD330/json/${this.category}.json`);
+  }
+  getData() {
+    return fetch(this.path)
+      .then(a)
+      .then((e) => e);
+  }
+  async findProductById(e) {
+    return (await this.getData()).find((i) => i.Id === e);
+  }
+}
+function f(t, e = document) {
+  return e.querySelector(t);
+}
+function h(t) {
+  return JSON.parse(localStorage.getItem(t));
+}
+function m(t, e) {
+  localStorage.setItem(t, JSON.stringify(e));
+}
+function g(t) {
+  return new URLSearchParams(window.location.search).get(t);
+}
+function u(t, e, n, i = "afterbegin", r = !1) {
+  r && (e.innerHTML = "");
+  const s = n.map(t);
+  e.insertAdjacentHTML(i, s.join(""));
+}
+function l(t) {
+  var n;
+  const e = (t.Image || "").replace(/^\.\.\/images/, "/WDD330/images");
+  return `
     <li class="product-card">
       <a href="/WDD330/product_pages/index.html?product=${t.Id}">
         <img src="${e}" alt="${t.Name}" />
-        <h3 class="card__brand">${((n=t.Brand)==null?void 0:n.Name)||""}</h3>
-        <h2 class="card__name">${t.NameWithoutBrand||t.Name}</h2>
-        <p class="product-card__price">$${(t.FinalPrice??t.ListPrice??0).toFixed(2)}</p>
+        <h3 class="card__brand">${((n = t.Brand) == null ? void 0 : n.Name) || ""}</h3>
+        <h2 class="card__name">${t.NameWithoutBrand || t.Name}</h2>
+        <p class="product-card__price">$${(t.FinalPrice ?? t.ListPrice ?? 0).toFixed(2)}</p>
       </a>
     </li>
-  `}class d{constructor(e,n,i){this.category=e,this.dataSource=n,this.listElement=i,this.products=[]}async init(){this.products=await this.dataSource.getData(),this.renderList(this.products)}renderList(e,n="afterbegin",i=!0){u(l,this.listElement,e,n,i)}}(async function(){const t=new c("tents"),e=document.querySelector(".product-list");if(!e)return;await new d("tents",t,e).init()})();export{c as P,g as a,h as g,f as q,m as s};
+  `;
+}
+class d {
+  constructor(e, n, i) {
+    (this.category = e),
+      (this.dataSource = n),
+      (this.listElement = i),
+      (this.products = []);
+  }
+  async init() {
+    (this.products = await this.dataSource.getData()),
+      this.renderList(this.products);
+  }
+  renderList(e, n = "afterbegin", i = !0) {
+    u(l, this.listElement, e, n, i);
+  }
+}
+(async function () {
+  const t = new c("tents"),
+    e = document.querySelector(".product-list");
+  if (!e) return;
+  await new d("tents", t, e).init();
+})();
+export { c as P, g as a, h as g, f as q, m as s };

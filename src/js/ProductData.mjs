@@ -1,10 +1,11 @@
 const baseURL = import.meta.env.VITE_SERVER_URL || "https://wdd330-backend.onrender.com/";
 
-function convertToJson(res) {
+async function convertToJson(res) {
+  const jsonResponse = await res.json();
   if (res.ok) {
-    return res.json();
+    return jsonResponse;
   } else {
-    throw new Error("Bad Response");
+    throw { name: 'servicesError', message: jsonResponse };
   }
 }
 
@@ -13,14 +14,12 @@ export default class ProductData {
   async getData(category) {
     try {
       const url = baseURL + `products/search/${category}`;
-      console.log('Fetching products from:', url);
       const response = await fetch(url);
       const data = await convertToJson(response);
-      console.log('API Response:', data);
       return data.Result || [];
     } catch (error) {
       console.error('Error fetching products:', error);
-      return [];
+      throw error; // Re-throw so callers can distinguish between an empty result and a failure
     }
   }
   async findProductById(id) {

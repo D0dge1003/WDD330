@@ -5,5 +5,3 @@ import Alert from "./Alert.js";
 loadHeaderFooter();
 
 new Alert().init();
-
-
