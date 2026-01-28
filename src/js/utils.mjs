@@ -1,3 +1,5 @@
+import Modal from './Modal.mjs';
+
 export function qs(selector, parent = document) {
   return parent.querySelector(selector);
 }
@@ -50,6 +52,41 @@ export async function loadHeaderFooter() {
   renderWithTemplate(headerTemplate, headerElement);
   renderWithTemplate(footerTemplate, footerElement);
   updateCartCount();
+
+  // Add search functionality
+  const searchForm = document.querySelector("#search-form");
+  if (searchForm) {
+    searchForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const input = document.querySelector("#search-input");
+      if (!input) return;
+
+      const query = input.value.trim();
+      if (!query) return; // Don't navigate if empty
+
+      // Normalize search term: replace spaces with hyphens, convert to lowercase
+      const normalizedQuery = query.toLowerCase().replace(/\s+/g, '-');
+      window.location.href = `/WDD330/product_listing/index.html?q=${encodeURIComponent(normalizedQuery)}`;
+    });
+  }
+
+  // Newsletter
+  const newsletterForm = document.querySelector("#newsletter-form");
+  if (newsletterForm) {
+    newsletterForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const modal = new Modal();
+      modal.render('Newsletter Subscription', 'Thank you for subscribing!');
+      newsletterForm.reset();
+    });
+  }
+
+  // Welcome Modal
+  if (!localStorage.getItem('hasSeenWelcome')) {
+    const modal = new Modal();
+    modal.render('Welcome to SleepOutside!', '<p>Register now to enter our giveaway!</p>');
+    localStorage.setItem('hasSeenWelcome', 'true');
+  }
 }
 
 export function updateCartCount() {
@@ -80,4 +117,16 @@ export function renderListWithTemplate(
   if (clear) parentElement.innerHTML = '';
   const htmlStrings = list.map(templateFn);
   parentElement.insertAdjacentHTML(position, htmlStrings.join(''));
-} 
+}
+
+
+export function animateCart() {
+  const cartIcon = document.querySelector(".cart");
+  if (cartIcon) {
+    cartIcon.classList.add("cart-animate");
+    // Remove class after animation to allow re-triggering
+    setTimeout(() => {
+      cartIcon.classList.remove("cart-animate");
+    }, 500); // 500ms matches CSS animation duration
+  }
+}
