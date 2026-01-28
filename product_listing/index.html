@@ -1,25 +1,33 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sleep Outside | Products</title>
-  <script type="module" crossorigin src="/WDD330/assets/listing-CF38R23-.js"></script>
-  <link rel="modulepreload" crossorigin href="/WDD330/assets/utils-B3GCnpRJ.js">
-  <link rel="modulepreload" crossorigin href="/WDD330/assets/ProductData-Ci8lvGAC.js">
-  <link rel="stylesheet" crossorigin href="/WDD330/assets/utils-CZY9XNxs.css">
-</head>
+    <title>Sleep Outside | Products</title>
+    <script type="module" crossorigin src="/WDD330/assets/listing-rR-1LhHB.js"></script>
+    <link rel="modulepreload" crossorigin href="/WDD330/assets/utils-DycB6jvq.js">
+    <link rel="modulepreload" crossorigin href="/WDD330/assets/ProductData-BF7rp3fH.js">
+    <link rel="stylesheet" crossorigin href="/WDD330/assets/utils-cES4vyns.css">
+  </head>
 
-<body>
+  <body>
     <header class="divider" id="main-header"></header>
     <main class="divider">
-        <section class="products">
-            <h2>Top Products: <span class="title"></span></h2>
-            <ul class="product-list"></ul>
-        </section>
+      <section class="products">
+        <div class="product-view-controls">
+          <h2>Top Products: <span class="title"></span></h2>
+          <div class="sort-products">
+            <label for="sort-select">Sort by:</label>
+            <select id="sort-select">
+              <option value="default" disabled selected>Select</option>
+              <option value="name">Name</option>
+              <option value="price">Price</option>
+            </select>
+          </div>
+        </div>
+        <ul class="product-list"></ul>
+      </section>
     </main>
     <footer id="main-footer"></footer>
-</body>
-
+  </body>
 </html>
