@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Nook</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>">
+</head>
+
+<body>
+    <header class="app-header">
+        <div class="logo">
+            <span class="icon">📖</span>
+            <h1>Book Nook</h1>
+        </div>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search for books by title or author...">
+            <button id="searchBtn">Search</button>
+        </div>
+        <nav class="user-menu">
+            <button id="testApiBtn" class="test-btn">Test API</button>
+        </nav>
+    </header>
+
+    <div class="main-layout">
+        <aside class="sidebar">
+            <div class="filter-group">
+                <h3>Lists</h3>
+                <ul class="nav-list">
+                    <li><button class="nav-btn active" data-view="search">🔍 Search Results</button></li>
+                    <li><button class="nav-btn" data-view="wishlist">✨ Wishlist</button></li>
+                    <li><button class="nav-btn" data-view="history">📚 Read History</button></li>
+                </ul>
+            </div>
+
+            <div class="filter-group">
+                <h3>Sort By</h3>
+                <select id="sortSelect">
+                    <option value="title">Title (A-Z)</option>
+                    <option value="newest">Year (Newest)</option>
+                    <option value="oldest">Year (Oldest)</option>
+                </select>
+            </div>
+        </aside>
+
+        <main class="content-area">
+            <div id="loadingIndicator" class="loading hidden">
+                <div class="spinner"></div>
+                <p>Searching the shelves...</p>
+            </div>
+            <div id="bookGrid" class="book-grid">
+                <!-- Books will be rendered here -->
+                <div class="empty-state">
+                    <p>Welcome to Book Nook! Start by searching for a book above.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+
+</html>

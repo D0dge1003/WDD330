@@ -20,6 +20,7 @@ export default defineConfig({
         register: resolve(__dirname, "src/register/index.html"),
         success: resolve(__dirname, "src/checkout/success.html"),
         wishlist: resolve(__dirname, "src/wishlist/index.html"),
+        book_nook: resolve(__dirname, "src/book-nook/index.html"),
       },
     },
   },
