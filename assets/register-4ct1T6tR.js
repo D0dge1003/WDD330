@@ -1,1 +1,0 @@
-import{l as s}from"./utils-DycB6jvq.js";import{r as a}from"./auth-CYUQ_HqM.js";s();const e=document.querySelector("#register-form");e&&e.addEventListener("submit",r=>{r.preventDefault();const t=document.querySelector("#name").value,o=document.querySelector("#email").value,m=document.querySelector("#password").value;a({name:t,email:o,password:m},"/WDD330/login/index.html")});
