@@ -19,3 +19,15 @@ export async function searchBooks(query) {
         throw error;
     }
 }
+
+export async function getBookDetails(key) {
+    const url = `https://openlibrary.org${key}.json`;
+    try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('Failed to fetch details');
+        return await response.json();
+    } catch (error) {
+        console.error("Error fetching details:", error);
+        return null;
+    }
+}
